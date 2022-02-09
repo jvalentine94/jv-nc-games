@@ -23,15 +23,15 @@ const Comments = () => {
         .then(({data}) => {
             setCommentState(!commentState)
             console.log(data)
-            // return data
+
         });
     }
 
     useEffect(()=>{
-    
+
         getComments(review_id)
         .then((commentsFromApi) => {
-            // console.log('USEFFECT',review_id,commentsFromApi)
+            
             setComments(commentsFromApi.comments)
             
         })
@@ -40,7 +40,8 @@ const Comments = () => {
 
     return (
         <main className="Comments">
-            <h1>Comments for Review Id: {review_id}</h1>
+            {/* <h1>Comments for Review ID: {review_id}</h1> */}
+            <p1>{}</p1>
         <ul>
            
         {comments.map((comment)=>{

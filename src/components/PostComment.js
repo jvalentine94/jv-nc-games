@@ -27,15 +27,15 @@ const postComment = (review_id,username,body) => {
        <div>
            <br></br>
             <form onSubmit={()=>{postComment(reviewId,author,body)}}>
-                <label>body:  </label>
+                <label><span>Body:  </span></label>
                 <input value={body} onChange={(event) => {setBody(event.target.value)}}></input>
                 <br></br>
                 <br></br>
-                <label>author:  </label>
+                <label>Author:  </label>
                 <input value={author} onChange={(event) => {setAuthor(event.target.value)}}></input>
                 <br></br>
                 <br></br>
-                <label>review_id:  </label>
+                <label>Review_id:  </label>
                 <input value={reviewId} onChange={(event) => {setReviewId(event.target.value)}}></input>
                 <br></br>
                 <br></br>

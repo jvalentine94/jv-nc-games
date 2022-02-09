@@ -14,11 +14,11 @@ const Nav = () => {
 
     return (
         <nav className = "Nav">
-            <Link to="/">Home</Link>
+            <Link to="/">Home&emsp; </Link>
             {categories.map((category)=>{
                 return (
                     <Link key={category.slug} to={`/category/${category.slug}`}>
-                        {category.slug} 
+                        {category.slug}&emsp; 
                     </Link>
                 )
             })}

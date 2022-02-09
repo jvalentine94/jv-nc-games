@@ -1,7 +1,97 @@
 img {
-    width:300px
+    width:95%
+}
+
+body {
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
 button {
-    height:25px 
+    height:25px;
+    margin-right: 5px;
+
 }
+
+
+nav {
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    position: fixed;
+    background-color:dodgerblue;
+    top:-22px;
+    z-index:1000
+}
+
+.ReviewElement {
+    width: 31%;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+
+}
+
+@media only screen and (max-width: 600px){
+    .ReviewElement {
+        width: 95%;
+        padding: 10px;
+        display: inline-block;
+        vertical-align: top;
+    
+    }
+    button {
+        height:100px;
+        width: 40%
+    }
+    img {
+        width:100%
+    }
+}
+
+body {
+    position: relative;
+    top: 100px;
+}
+
+
+form {
+    margin: 0px 0px 0px 20px
+}
+
+label{
+	display: block;
+	margin: 0px 0px 15px 0px;
+}
+
+input {
+	box-sizing: border-box;
+	border: 1px solid #C2C2C2;
+	box-shadow: 1px 1px 4px #EBEBEB;
+	border-radius: 3px;
+	padding: 7px;
+	outline: none;
+}
+
+nav {
+    color: red;
+}
+
+a:link { text-decoration: none; 
+    
+}
+
+
+a:visited { text-decoration: none; 
+    color: black;
+}
+
+
+a:hover { text-decoration: none;
+    color: red;}
+
+
+a:active { text-decoration: none;
+  }
+

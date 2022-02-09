@@ -20,18 +20,13 @@ const Reviews = () => {
     return (
         <main className="Reviews">
        <h2>All Reviews</h2>
-       <ul>
-           
+       
            {reviews.map((review)=>{
-               
                return(
-               <li key={review.review_id}>
                    <ReviewElement review={review}></ReviewElement>
-                </li>
                 )
-           })
-           }
-       </ul>
+           })}
+       
        </main>
     )
 }

@@ -8,16 +8,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <BrowserRouter>
-    <div className="Homepage">
-      <h1>JV NC GAME REVIEWS</h1>
+    <body className="Homepage">
+      <h1>JV NC Game Reviews
       <Nav />
-      <Routes>
+      </h1>
+      
+      <Routes className="Pagebody">
         <Route path="/comments/:review_id" element ={<Comments/>}></Route> 
         <Route path="/category/:review_slug" element ={<Reviews/>}></Route>
         <Route path="/PostComment" element ={<PostComment/>}></Route>
-    
       </Routes>
-    </div>
+      
+    </body>
   </BrowserRouter>
   );
 }
