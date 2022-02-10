@@ -15,7 +15,7 @@ const Reviews = () => {
          console.log('effect params',review_slug,sortby)
         getReviews(review_slug,sortby)
         .then((reviewsFromApi) => {
-            console.log('new get')
+            console.log('new get',reviewsFromApi)
             setReviews(reviewsFromApi)
         })
     },[review_slug,sortReq])
@@ -30,10 +30,9 @@ const Reviews = () => {
        <h2>All {review_slug} Reviews</h2>
        <h3>Sort By: 
        <select onChange={(event)=>{setSortby(event.target.value)}}> 
-           <option value='created_at'> Date</option>
+           <option value='created_at'>Date</option>
            <option value='votes'>Votes</option>
            <option value='title'>Title</option>
-           
        </select>
        <button onClick={()=>{handleSort()}}>Go</button>
        </h3>

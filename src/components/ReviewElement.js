@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 
 const ReviewElement = (props) => {
 
-    const [votes,setVotes] = useState(props.review.votes)
+    const [votes,setVotes] = useState(0)
     const [err, setErr] = useState(null)
 
 
@@ -15,7 +15,7 @@ const ReviewElement = (props) => {
     });
 
     const patchReviewVotesUp1 = () => {
-        setVotes((oldVotes) => oldVotes+1)
+        setVotes((currVotes)=>currVotes+1)
         setErr(null)
         gamesApi.patch(`/reviews/${props.review.review_id}?inc_votes=1`)
         .catch((err)=>{
@@ -26,15 +26,18 @@ const ReviewElement = (props) => {
     }
 
     const patchReviewVotesDown1 = () => {
-        setVotes((oldVotes) => oldVotes-1)
+        setVotes((currVotes)=>currVotes-1)
         setErr(null)
         gamesApi.patch(`/reviews/${props.review.review_id}?inc_votes=-1`)
         .catch((err)=>{
             setVotes((oldVotes) => oldVotes+1)
             setErr('Error, please try again')
         })
-        
     }
+
+    // useEffect(()=>{
+    //     setVotes(props.review.votes)
+    // },[])
 
     return (
         <div className="ReviewElement">
@@ -47,7 +50,7 @@ const ReviewElement = (props) => {
                    <p>Body: {props.review.review_body}</p>
                    <p>Category: {props.review.category}</p>
                    <p>Created At: {props.review.created_at}</p>
-                   <p>Votes: {votes}</p>
+                   <p>Votes: {props.review.votes+votes}</p>
                     <button onClick={()=>{patchReviewVotesUp1()}}>Upvote</button>
                     <button onClick={()=>{patchReviewVotesDown1()}}>Downvote</button>
                     <br></br>
