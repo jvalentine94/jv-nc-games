@@ -22,7 +22,9 @@ const Nav = () => {
                     </Link>
                 )
             })}
-            <Link to="/PostComment">Post Comment</Link>
+            <Link to="/PostComment">Post Comment&emsp;</Link>
+            <Link to="/Login">Login&emsp;</Link>
+
         </nav>
     )
 }

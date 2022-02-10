@@ -51,7 +51,7 @@ const ReviewElement = (props) => {
                     <button onClick={()=>{patchReviewVotesUp1()}}>Upvote</button>
                     <button onClick={()=>{patchReviewVotesDown1()}}>Downvote</button>
                     <br></br>
-                    <Link to={`/comments/${props.review.review_id}`} >
+                    <Link to={`/comments/${props.review.review_id}`}>
                         View Comments
                     </Link>
 

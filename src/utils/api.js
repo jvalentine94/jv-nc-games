@@ -12,12 +12,19 @@ export const getCategories = () => {
     });
 }
 
-export const getReviews = (review_slug) => {
+export const getReviews = (review_slug,sortby) => {
 
-    return gamesApi.get(`/reviews?category=${review_slug}`)
-    .then(({data}) => {
-        return data.reviews
-    });
+    if (sortby===''){
+        return gamesApi.get(`/reviews?category=${review_slug}`)
+        .then(({data}) => {
+            return data.reviews
+        })
+    } else {
+        return gamesApi.get(`/reviews?category=${review_slug}`,{params:{sort_by:sortby}})
+        .then(({data}) => {
+            return data.reviews
+        })
+    }
 }
 
 export const getComments = (review_id) => {

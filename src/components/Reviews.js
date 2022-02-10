@@ -7,19 +7,37 @@ import ReviewElement from './ReviewElement'
 const Reviews = () => {
 
     const [reviews,setReviews] = useState([])
+    const [sortby,setSortby] = useState('')
+    const [sortReq,setSortReq] = useState(false)
     const {review_slug} = useParams()
 
     useEffect(()=>{
-        getReviews(review_slug)
+         console.log('effect params',review_slug,sortby)
+        getReviews(review_slug,sortby)
         .then((reviewsFromApi) => {
-            console.log('test location')
+            console.log('new get')
             setReviews(reviewsFromApi)
         })
-    },[review_slug])
+    },[review_slug,sortReq])
+
+    const handleSort = () => {
+        console.log("SORT")
+        setSortReq(!sortReq)
+    }
 
     return (
         <main className="Reviews">
-       <h2>All Reviews</h2>
+       <h2>All {review_slug} Reviews</h2>
+       <h3>Sort By: 
+       <select onChange={(event)=>{setSortby(event.target.value)}}> 
+           <option value='created_at'> Date</option>
+           <option value='votes'>Votes</option>
+           <option value='title'>Title</option>
+           
+       </select>
+       <button onClick={()=>{handleSort()}}>Go</button>
+       </h3>
+       
        
            {reviews.map((review)=>{
                return(
