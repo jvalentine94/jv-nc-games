@@ -10,6 +10,24 @@ export const getCategories = () => {
     .then(({data}) => {
         return data.categories
     });
+
+}
+
+export const getAllReviews = (sortby) => {
+
+    if (sortby===''){
+    return gamesApi.get('/reviews')
+        .then(({data}) => {
+            console.log("UTIL1",data)
+            return data.reviews
+    });
+    } else {
+        return gamesApi.get('/reviews',{params:{sort_by:sortby}})
+        .then(({data}) => {
+            console.log("UTIL2",data)
+            return data.reviews
+        });
+    }
 }
 
 export const getReviews = (review_slug,sortby) => {
@@ -34,3 +52,41 @@ export const getComments = (review_id) => {
     });
 }
 
+export const patchReviewVotesUp1 = (setVotes,setErr,reviewID) => {
+
+    setVotes((currVotes)=>currVotes+1)
+    setErr(null)
+    
+    gamesApi.patch(`/reviews/${reviewID}?inc_votes=1`)
+    .catch((err)=>{
+        setVotes((oldVotes) => oldVotes-1)
+        setErr('Error, please try again')
+    })
+    
+}
+
+export const patchReviewVotesDown1 = (setVotes,setErr,reviewID) => {
+
+    setVotes((currVotes)=>currVotes-1)
+    setErr(null)
+
+    gamesApi.patch(`/reviews/${reviewID}?inc_votes=-1`)
+    .catch((err)=>{
+        setVotes((oldVotes) => oldVotes+1)
+        setErr('Error, please try again')
+    })
+}
+
+export const deleteComment = (comment_id,setCommentState,commentState) => {
+
+    return gamesApi.delete(`/comments/${comment_id}`)
+    .then(({data}) => {
+        setCommentState(!commentState)
+        console.log(data)
+
+    });
+}
+
+export const postComment = (review_id,username,body) => {
+    return gamesApi.post(`/reviews/${review_id}/comments?username=${username}&body=${body}`)
+}

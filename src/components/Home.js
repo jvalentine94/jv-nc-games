@@ -1,24 +1,23 @@
 import { useEffect, useState } from 'react';
-import { useParams} from 'react-router-dom';
-import { getReviews } from '../utils/api';
-import ReviewElement from './ReviewElement'
 
+import { getAllReviews } from '../utils/api';
 
-const Reviews = () => {
+import ReviewElement from './ReviewElement';
+
+import axios from 'axios';
+
+const Home = () => {
 
     const [reviews,setReviews] = useState([])
     const [sortby,setSortby] = useState('')
     const [sortReq,setSortReq] = useState(false)
-    const {review_slug} = useParams()
 
     useEffect(()=>{
-
-        getReviews(review_slug,sortby)
-        .then((reviewsFromApi) => {
-            setReviews(reviewsFromApi)
+        getAllReviews(sortby)
+        .then((data)=>{
+            setReviews(data)
         })
-
-    },[review_slug,sortReq])
+    },[sortReq])
 
     const handleSort = () => {
         console.log("SORT")
@@ -26,8 +25,9 @@ const Reviews = () => {
     }
 
     return (
-        <main className="Reviews">
-       <h2>All {review_slug} Reviews</h2>
+      
+           <main className="Reviews">
+       <h2>All Reviews</h2>
        <h3>Sort By: 
        <select onChange={(event)=>{setSortby(event.target.value)}}> 
            <option value='created_at'>Date</option>
@@ -40,12 +40,13 @@ const Reviews = () => {
        <ul>
            {reviews.map((review)=>{
                return(
-                   <ReviewElement review={review} key={review.review_id}></ReviewElement>
+                <ReviewElement review={review} key={review.review_id} ></ReviewElement>
                 )
            })}
        </ul>
        </main>
+      
     )
 }
 
-export default Reviews;
+export default Home;

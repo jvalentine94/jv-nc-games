@@ -50,6 +50,12 @@ select {
 
 }
 
+#LoginDetails {
+    background-color: red;
+    z-index: 2000;
+}
+
+
 @media only screen and (max-width: 600px){
     .ReviewElement {
         width: 95%;
@@ -59,17 +65,25 @@ select {
     
     }
     button {
-        height:100px;
-        width: 40%
+        height:50px;
+        width: 20%
     }
     img {
         width:100%
     }
+
+    h1{
+        padding-top: px;
+        font-size:20px;
+        top:-20px;
+    }
+
+
 }
 
 body {
     position: relative;
-    top: 150px;
+    top: 300px;
 }
 
 

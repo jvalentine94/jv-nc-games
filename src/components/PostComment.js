@@ -1,32 +1,27 @@
 import { useEffect, useState } from 'react';
 
-import axios from 'axios';
+import {postComment} from '../utils/api'
 
 const PostComment = () => {
 
-const [body,setBody] = useState('')
-const [author,setAuthor] = useState('')
-const [reviewId,setReviewId] = useState('')
+    const [body,setBody] = useState('')
+    const [author,setAuthor] = useState('')
+    const [reviewId,setReviewId] = useState('')
 
-const gamesApi = axios.create({
-    baseURL: 'https://jv-games-app.herokuapp.com/api',
-});
 
-const postComment = (review_id,username,body) => {
-    return gamesApi.post(`/reviews/${review_id}/comments?username=${username}&body=${body}`)
-    .then(({data}) => {
-        setBody("")
-        setAuthor("")
-        setReviewId("")
-        console.log(data)
-        return data
-    });
-}
+    const handleSubmit = (reviewId,author,body) => {
+    postComment(reviewId,author,body)
+        .then(() => {
+            setBody("")
+            setAuthor("")
+            setReviewId("")
+        })
+    }
 
     return (
        <div>
            <br></br>
-            <form onSubmit={()=>{postComment(reviewId,author,body)}}>
+            <form onSubmit={()=>{handleSubmit(reviewId,author,body)}}>
                 <label><span>Body:  </span></label>
                 <input value={body} onChange={(event) => {setBody(event.target.value)}}></input>
                 <br></br>

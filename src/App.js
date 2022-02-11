@@ -4,6 +4,7 @@ import Comments from './components/Comments';
 import PostComment from './components/PostComment';
 import Login from './components/Login';
 import Reviews from './components/Reviews';
+import Home from './components/Home';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import {createContext, useState} from 'react';
@@ -17,22 +18,23 @@ function App() {
   return (
     <BrowserRouter>
     <UserContext.Provider value={{userState,setUserState}}>
-    <body className="Homepage">
+    <div className="Homepage">
       <h1>JV NC Game Reviews
         <br></br>
         <br></br>
       <Nav />
-      <p>Logged In User: {userState} <button onClick={()=>{setUserState('')}}>logout</button> </p>
+      <p id='LoginDetails'>Logged In User: {userState} <button onClick={()=>{setUserState('')}}>logout</button> </p>
       </h1>
       
-      <Routes className="Pagebody">
+      <Routes className="Pagebody" id='pagebody'>
+      <Route path="/*" element ={<Home/>}></Route> 
         <Route path="/comments/:review_id" element ={<Comments/>}></Route> 
-        <Route path="/category/:review_slug" element ={<Reviews/>}></Route>
+        <Route path="/category/:review_slug/*" element ={<Reviews/>}></Route>
         <Route path="/PostComment" element ={<PostComment/>}></Route>
         <Route path="/Login" element ={<Login/>}></Route>
       </Routes>
       
-    </body>
+    </div>
     </UserContext.Provider>
   </BrowserRouter>
   );
