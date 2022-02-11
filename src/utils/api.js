@@ -45,11 +45,13 @@ export const getReviews = (review_slug,sortby) => {
     }
 }
 
-export const getComments = (review_id) => {
-    return gamesApi.get(`/reviews/${review_id}/comments`)
-    .then(({data}) => {
-        return data
-    });
+export const getReviewById = (reviewId) => {
+
+        return gamesApi.get(`/reviews/${reviewId}`)
+        .then(({data}) => {
+            return data.review
+        })
+
 }
 
 export const patchReviewVotesUp1 = (setVotes,setErr,reviewID) => {
@@ -75,6 +77,13 @@ export const patchReviewVotesDown1 = (setVotes,setErr,reviewID) => {
         setVotes((oldVotes) => oldVotes+1)
         setErr('Error, please try again')
     })
+}
+
+export const getComments = (review_id) => {
+    return gamesApi.get(`/reviews/${review_id}/comments`)
+    .then(({data}) => {
+        return data
+    });
 }
 
 export const deleteComment = (comment_id,setCommentState,commentState) => {
