@@ -1,6 +1,6 @@
 import "./App.css";
 import Nav from "./components/Nav";
-import Comments from "./components/Comments";
+import ReviewPage from "./components/ReviewPage";
 import PostComment from "./components/PostComment";
 import Login from "./components/Login";
 import Reviews from "./components/Reviews";
@@ -37,7 +37,7 @@ function App() {
 
           <Routes className="Pagebody" id="pagebody">
             <Route path="/*" element={<Home />}></Route>
-            <Route path="/comments/:review_id" element={<Comments />}></Route>
+            <Route path="/comments/:review_id" element={<ReviewPage />}></Route>
             <Route
               path="/category/:review_slug/*"
               element={<Reviews />}
