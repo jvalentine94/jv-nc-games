@@ -1,6 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getComments, deleteComment, getReviewById } from "../utils/api";
+import {
+  getComments,
+  deleteComment,
+  getReviewById,
+  patchCommentVotesUp1,
+  patchCommentVotesDown1,
+} from "../utils/api";
 
 const Comments = () => {
   const [comments, setComments] = useState([]);
@@ -8,7 +14,8 @@ const Comments = () => {
   const [commentState, setCommentState] = useState(false);
 
   const [review, setReview] = useState({});
-
+  const [err, setErr] = useState(null);
+  const [votes, setVotes] = useState(0);
   const { review_id } = useParams();
 
   useEffect(() => {
@@ -24,6 +31,17 @@ const Comments = () => {
         setReview(review);
       });
   }, [review_id, commentState]);
+
+  const handleVote = (option, commentId) => {
+    if (votes >= 1 || votes <= -1) {
+    } else {
+      if (option === 1) {
+        patchCommentVotesUp1(setVotes, setErr, commentId);
+      } else if (option === -1) {
+        patchCommentVotesDown1(setVotes, setErr, commentId);
+      }
+    }
+  };
 
   return (
     <main className="Comments">
@@ -47,6 +65,20 @@ const Comments = () => {
             <h3>Author: {comment.author}</h3>
             <h3>Review ID: {comment.review_id}</h3>
             <h3>Created At: {comment.created_at}</h3>
+            <button
+              onClick={() => {
+                handleVote(1, comment.comment_id);
+              }}
+            >
+              Upvote
+            </button>
+            <button
+              onClick={() => {
+                handleVote(-1, comment.comment_id);
+              }}
+            >
+              Downvote
+            </button>
             <button
               onClick={() => {
                 deleteComment(
