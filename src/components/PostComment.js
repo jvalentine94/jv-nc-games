@@ -1,60 +1,54 @@
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { UserContext } from "../App";
 import { postComment } from "../utils/api";
+import ErrorMessage from "./ErrorMessage";
 
-const PostComment = () => {
+const PostComment = (props) => {
   const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("");
-  const [reviewId, setReviewId] = useState("");
+  const [errMessage, setErrMessage] = useState("");
 
-  const handleSubmit = (reviewId, author, body) => {
-    postComment(reviewId, author, body).then(() => {
-      setBody("");
-      setAuthor("");
-      setReviewId("");
-    });
+  const { userState } = useContext(UserContext);
+
+  const handleSubmit = (body) => {
+    if (body === "") {
+      setErrMessage("Already Voted");
+    } else {
+      postComment(props.review, userState, body, props.setCommentState)
+        .then(() => {
+          console.log("SUCCESS");
+          setBody("");
+        })
+        .catch((err) => {
+          console.log("ERROR", err);
+        });
+    }
   };
 
   return (
     <div>
       <br></br>
-      <form
-        onSubmit={() => {
-          handleSubmit(reviewId, author, body);
+
+      <label>
+        <span>Body: </span>
+      </label>
+      <input
+        value={body}
+        onChange={(event) => {
+          setBody(event.target.value);
+        }}
+      ></input>
+      <br></br>
+      <br></br>
+
+      <button
+        onClick={() => {
+          handleSubmit(body);
         }}
       >
-        <label>
-          <span>Body: </span>
-        </label>
-        <input
-          value={body}
-          onChange={(event) => {
-            setBody(event.target.value);
-          }}
-        ></input>
-        <br></br>
-        <br></br>
-        <label>Author: </label>
-        <input
-          value={author}
-          onChange={(event) => {
-            setAuthor(event.target.value);
-          }}
-        ></input>
-        <br></br>
-        <br></br>
-        <label>Review_id: </label>
-        <input
-          value={reviewId}
-          onChange={(event) => {
-            setReviewId(event.target.value);
-          }}
-        ></input>
-        <br></br>
-        <br></br>
-        <button>Submit</button>
-        <br></br>
-      </form>
+        Submit
+      </button>
+      <br></br>
+      <ErrorMessage message={errMessage}></ErrorMessage>
     </div>
   );
 };

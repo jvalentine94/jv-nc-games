@@ -1,9 +1,5 @@
 import { useState } from "react";
-import {
-  patchCommentVotesUp1,
-  patchCommentVotesDown1,
-  deleteComment,
-} from "../utils/api";
+import { patchCommentVotesUp1, patchCommentVotesDown1 } from "../utils/api";
 
 const CommentElement = (props) => {
   const [votes, setVotes] = useState(0);
@@ -17,6 +13,13 @@ const CommentElement = (props) => {
       } else if (option === -1) {
         patchCommentVotesDown1(setVotes, setErr, commentId);
       }
+    }
+  };
+
+  const deleteCommentHandler = () => {
+    if (props.comment.author === 1) {
+      deleteCommentHandler(props.comment.comment_id, props.setCommentState);
+    } else {
     }
   };
 
@@ -43,10 +46,10 @@ const CommentElement = (props) => {
       </button>
       <button
         onClick={() => {
-          deleteComment(props.comment.comment_id, props.setCommentState);
+          deleteCommentHandler(props.comment.comment_id, props.setCommentState);
         }}
       >
-        Delete Comment
+        Delete
       </button>
     </div>
   );

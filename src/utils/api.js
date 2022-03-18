@@ -51,7 +51,7 @@ export const patchReviewVotesUp1 = (setVotes, setErr, reviewID) => {
   setVotes((currVotes) => currVotes + 1);
   setErr(null);
 
-  gamesApi.patch(`/reviews/${reviewID}?inc_votes=1`).catch((err) => {
+  gamesApi.patch(`/reviews/${reviewID}`, { inc_votes: 1 }).catch((err) => {
     setVotes((oldVotes) => oldVotes - 1);
     setErr("Error, please try again");
   });
@@ -61,7 +61,7 @@ export const patchReviewVotesDown1 = (setVotes, setErr, reviewID) => {
   setVotes((currVotes) => currVotes - 1);
   setErr(null);
 
-  gamesApi.patch(`/reviews/${reviewID}?inc_votes=-1`).catch((err) => {
+  gamesApi.patch(`/reviews/${reviewID}`, { inc_votes: -1 }).catch((err) => {
     setVotes((oldVotes) => oldVotes + 1);
     setErr("Error, please try again");
   });
@@ -80,10 +80,19 @@ export const deleteComment = (comment_id, setCommentState) => {
   });
 };
 
-export const postComment = (review_id, username, body) => {
-  return gamesApi.post(
-    `/reviews/${review_id}/comments?username=${username}&body=${body}`
-  );
+export const postComment = (review_id, username, body, setCommentState) => {
+  console.log(review_id, username, body);
+  const postData = {
+    username: username,
+    body: body,
+  };
+
+  return gamesApi
+    .post(`/reviews/${review_id}/comments`, postData)
+    .then((res) => {
+      console.log(res);
+      setCommentState((currState) => !currState);
+    });
 };
 
 export const patchCommentVotesUp1 = (setVotes, setErr, commentID) => {

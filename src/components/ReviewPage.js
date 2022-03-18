@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { getComments, deleteComment, getReviewById } from "../utils/api";
 
 import CommentElement from "../components/CommentElement";
+import PostComment from "./PostComment";
 
 const ReviewPage = () => {
   const [comments, setComments] = useState([]);
@@ -18,7 +19,6 @@ const ReviewPage = () => {
       .then((commentsFromApi) => {
         setComments(commentsFromApi.comments);
       })
-
       .then(() => {
         return getReviewById(review_id);
       })
@@ -50,12 +50,13 @@ const ReviewPage = () => {
           ></CommentElement>
         );
       })}
+      <h2>Post New Comment</h2>
+      <PostComment
+        review={review.review_id}
+        setCommentState={setCommentState}
+      ></PostComment>
     </main>
   );
 };
 
 export default ReviewPage;
-
-// 1. Change from comments to ReviewPage
-// 2. New element for each comment
-// 3. Hand down vote and err state.

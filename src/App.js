@@ -1,10 +1,10 @@
 import "./App.css";
 import Nav from "./components/Nav";
 import ReviewPage from "./components/ReviewPage";
-import PostComment from "./components/PostComment";
 import Login from "./components/Login";
 import Reviews from "./components/Reviews";
 import Home from "./components/Home";
+import ErrorPage from "./components/ErrorPage";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import { createContext, useState } from "react";
@@ -36,14 +36,11 @@ function App() {
           </h1>
 
           <Routes className="Pagebody" id="pagebody">
-            <Route path="/*" element={<Home />}></Route>
+            <Route path="/" element={<Home />}></Route>
             <Route path="/comments/:review_id" element={<ReviewPage />}></Route>
-            <Route
-              path="/category/:review_slug/*"
-              element={<Reviews />}
-            ></Route>
-            <Route path="/PostComment" element={<PostComment />}></Route>
+            <Route path="/category/:review_slug" element={<Reviews />}></Route>
             <Route path="/Login" element={<Login />}></Route>
+            <Route path="/*" element={<ErrorPage />} />
           </Routes>
         </div>
       </UserContext.Provider>

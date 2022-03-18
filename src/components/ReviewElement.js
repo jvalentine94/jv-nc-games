@@ -2,12 +2,16 @@ import { useState } from "react";
 import { patchReviewVotesDown1, patchReviewVotesUp1 } from "../utils/api";
 import { Link } from "react-router-dom";
 
+import ErrorMessage from "./ErrorMessage";
+
 const ReviewElement = (props) => {
   const [votes, setVotes] = useState(0);
   const [err, setErr] = useState(null);
+  const [errMessage, setErrMessage] = useState("");
 
   const handleVote = (option) => {
     if (votes >= 1 || votes <= -1) {
+      setErrMessage("Already Voted");
     } else {
       if (option === 1) {
         patchReviewVotesUp1(setVotes, setErr, props.review.review_id);
@@ -45,6 +49,7 @@ const ReviewElement = (props) => {
       <Link review={props.review} to={`/comments/${props.review.review_id}`}>
         View Review/Comments Comments
       </Link>
+      <ErrorMessage message={errMessage}></ErrorMessage>
     </div>
   );
 };
