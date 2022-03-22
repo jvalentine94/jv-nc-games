@@ -6,6 +6,16 @@ img {
   width: 25%;
 }
 
+strong {
+  font-size: 3.5vw;
+}
+
+main {
+  background-color: bisque;
+  text-align: center;
+  padding-top: 2%;
+}
+
 [hidden] {
   display: none !important;
 }
@@ -21,6 +31,7 @@ body {
 button {
   height: 25px;
   margin-right: 5px;
+  vertical-align: middle;
 }
 
 nav {
@@ -55,6 +66,7 @@ ul {
   vertical-align: top;
   border-style: solid;
   border-width: 2px;
+  background-color: white;
 }
 
 .commentbox {
@@ -66,9 +78,21 @@ ul {
   border-width: 2px;
 }
 
+.LoginPage {
+  background-color: white;
+}
+
 #LoginDetails {
-  background-color: red;
+  background-color: #e8e8e8;
   z-index: 2000;
+  width: 50%;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-radius: 20px;
+  align-items: center;
+  padding-bottom: 2px;
+  padding-top: 2px;
 }
 
 .ErrorMessage {
@@ -94,17 +118,19 @@ ul {
   }
   #Reviews {
     position: absolute;
-    padding-top: 15vw;
   }
   h1 {
     font-size: 3vw;
     top: -20px;
   }
+  main {
+    padding-top: 10%;
+  }
 }
 
 body {
   position: absolute;
-  padding-top: 20vw;
+  padding-top: 14%;
 }
 
 label {

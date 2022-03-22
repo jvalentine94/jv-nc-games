@@ -19,7 +19,7 @@ function App() {
       <UserContext.Provider value={{ userState, setUserState }}>
         <div className="Homepage">
           <h1>
-            JV NC Game Reviews
+            <strong>JV NC Game Reviews</strong>
             <br></br>
             <br></br>
             <Nav />

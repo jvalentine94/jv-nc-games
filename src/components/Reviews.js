@@ -27,7 +27,7 @@ const Reviews = () => {
   return (
     <main className="Reviews">
       <h2>{review_slug[0].toUpperCase() + review_slug.slice(1)} Reviews</h2>
-      <h3>
+      <menu>
         Sort By:
         <select
           onChange={(event) => {
@@ -56,7 +56,7 @@ const Reviews = () => {
         >
           Go
         </button>
-      </h3>
+      </menu>
       <h3 hidden={!loadingStatus}>
         <img src={errorImg} alt="Error" id="loadingimage" />
         LOADING

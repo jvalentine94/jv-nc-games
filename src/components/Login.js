@@ -30,7 +30,7 @@ const Login = () => {
   };
 
   return (
-    <main>
+    <main className="LoginPage">
       <br></br>
       <br></br>
       <br></br>
