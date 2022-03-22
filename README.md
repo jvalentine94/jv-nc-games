@@ -2,6 +2,8 @@
 
 ## Deployed Version
 
+https://jv-nc-games.netlify.app/
+
 ## Description
 
 Website displaying game reviews where users can interact with existing reviews and create new ones. The website uses a backend API as the basis for the database, for which the GitHub repository can be found below. The API was built as a portfolio piece for the owner to demonstrate their frontend skillset.
