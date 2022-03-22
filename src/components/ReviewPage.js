@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getComments, deleteComment, getReviewById } from "../utils/api";
+import { getComments, getReviewById } from "../utils/api";
 import ErrorPage from "../components/ErrorPage";
 
 import CommentElement from "../components/CommentElement";
@@ -37,17 +37,20 @@ const ReviewPage = () => {
     return <ErrorPage></ErrorPage>;
   } else {
     return (
-      <main className="Comments">
-        {/* <h1>Comments for Review ID: {review_id}</h1> */}
-        <h3>Title: {review.title}</h3>
-        <p>Review ID: {review.review_id}</p>
-        <p>Designer: {review.designer}</p>
-        <p>Owner: {review.owner}</p>
-        <img src={`${review.review_img_url}`} alt="" className="titleimg" />
-        <p>{review.review_body}</p>
-        <p>Category: {review.category}</p>
-        <p>Created At: {review.created_at}</p>
-        <p>Votes: {review.votes}</p>
+      <main id="Comments">
+        <br></br>
+        <div className="commentbox">
+          {/* <h1>Comments for Review ID: {review_id}</h1> */}
+          <h3>Title: {review.title}</h3>
+          <p>Review ID: {review.review_id}</p>
+          <p>Designer: {review.designer}</p>
+          <p>Owner: {review.owner}</p>
+          <img src={`${review.review_img_url}`} alt="" className="titleimg" />
+          <p>{review.review_body}</p>
+          <p>Category: {review.category}</p>
+          <p>Created At: {review.created_at}</p>
+          <p>Votes: {review.votes}</p>
+        </div>
 
         <h2>Comments</h2>
         {comments.map((comment) => {
