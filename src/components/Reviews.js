@@ -2,30 +2,31 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getReviews } from "../utils/api";
 import ReviewElement from "./ReviewElement";
+import errorImg from "../images/error-image.png";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const [sortby, setSortby] = useState("");
+  const [orderby, setOrderby] = useState("");
   const [sortReq, setSortReq] = useState(false);
+  const [loadingStatus, setLoadingStatus] = useState(true);
   const { review_slug } = useParams();
 
-  useEffect(
-    (sortby) => {
-      getReviews(review_slug, sortby).then((reviewsFromApi) => {
-        setReviews(reviewsFromApi);
-      });
-    },
-    [review_slug, sortReq]
-  );
+  useEffect(() => {
+    getReviews(review_slug, sortby, orderby).then((reviewsFromApi) => {
+      console.log("REVIEWS", sortby, reviewsFromApi);
+      setReviews(reviewsFromApi);
+      setLoadingStatus(false);
+    });
+  }, [review_slug, sortReq]);
 
   const handleSort = () => {
-    console.log("SORT");
     setSortReq(!sortReq);
   };
 
   return (
     <main className="Reviews">
-      <h2>All {review_slug} Reviews</h2>
+      <h2>{review_slug[0].toUpperCase() + review_slug.slice(1)} Reviews</h2>
       <h3>
         Sort By:
         <select
@@ -37,6 +38,17 @@ const Reviews = () => {
           <option value="votes">Votes</option>
           <option value="title">Title</option>
         </select>
+        <br></br>
+        Order by:
+        <select
+          onChange={(event) => {
+            setOrderby(event.target.value);
+          }}
+        >
+          <option value="DESC">High to Low</option>
+          <option value="ASC">Low to High</option>
+        </select>
+        <br></br>
         <button
           onClick={() => {
             handleSort();
@@ -45,7 +57,10 @@ const Reviews = () => {
           Go
         </button>
       </h3>
-
+      <h3 hidden={!loadingStatus}>
+        <img src={errorImg} alt="Error" id="loadingimage" />
+        LOADING
+      </h3>
       <ul>
         {reviews.map((review) => {
           return (

@@ -4,28 +4,35 @@ import { getAllReviews } from "../utils/api";
 
 import ReviewElement from "./ReviewElement";
 
+import errorImg from "../images/error-image.png";
+
 const Home = () => {
   const [reviews, setReviews] = useState([]);
   const [sortby, setSortby] = useState("");
+  const [orderby, setOrderby] = useState("");
+  const [loadingStatus, setLoadingStatus] = useState(true);
+
   const [sortReq, setSortReq] = useState(false);
 
-  useEffect(
-    (sortby) => {
-      getAllReviews(sortby).then((data) => {
-        setReviews(data);
-      });
-    },
-    [sortReq]
-  );
+  useEffect(() => {
+    console.log(sortby);
+    getAllReviews(sortby, orderby).then((data) => {
+      console.log(data);
+      setReviews(data);
+      setLoadingStatus(false);
+    });
+  }, [sortReq]);
+
+  console.log(loadingStatus);
 
   const handleSort = () => {
-    setSortReq(!sortReq);
+    setSortReq((currsort) => !currsort);
   };
 
   return (
     <main className="Reviews">
       <h2>All Reviews</h2>
-      <h3>
+      <h3 id="Filters">
         Sort By:
         <select
           onChange={(event) => {
@@ -36,6 +43,17 @@ const Home = () => {
           <option value="votes">Votes</option>
           <option value="title">Title</option>
         </select>
+        <br></br>
+        Order by:
+        <select
+          onChange={(event) => {
+            setOrderby(event.target.value);
+          }}
+        >
+          <option value="DESC">High to Low</option>
+          <option value="ASC">Low to High</option>
+        </select>
+        <br></br>
         <button
           onClick={() => {
             handleSort();
@@ -44,7 +62,10 @@ const Home = () => {
           Go
         </button>
       </h3>
-
+      <h3 hidden={!loadingStatus}>
+        <img src={errorImg} alt="Error" id="loadingimage" />
+        LOADING
+      </h3>
       <ul>
         {reviews.map((review) => {
           return (

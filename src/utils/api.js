@@ -11,33 +11,63 @@ export const getCategories = () => {
   });
 };
 
-export const getAllReviews = (sortby) => {
-  if (sortby === "") {
+export const getAllReviews = (sortby, orderby) => {
+  console.log("SORTBY", sortby);
+  if (sortby === "" && orderby === "") {
+    console.log("CASE 1");
     return gamesApi.get("/reviews").then(({ data }) => {
-      console.log("UTIL1", data);
       return data.reviews;
     });
-  } else {
+  } else if (sortby !== "" && orderby === "") {
+    console.log("CASE 2", `/reviews?sort_by=${sortby}`);
+
+    return gamesApi.get(`/reviews?sort_by=${sortby}`).then(({ data }) => {
+      return data.reviews;
+    });
+  } else if (sortby === "" && orderby !== "") {
+    return gamesApi.get(`/reviews?order_by=${orderby}`).then(({ data }) => {
+      return data.reviews;
+    });
+  } else if (sortby !== "" && orderby !== "") {
+    console.log(sortby, orderby);
     return gamesApi
-      .get("/reviews", { params: { sort_by: sortby } })
+      .get(`/reviews?sort_by=${sortby}&order_by=${orderby}`)
       .then(({ data }) => {
-        console.log("UTIL2", data);
         return data.reviews;
       });
+  } else {
+    console.log("ERROR");
   }
 };
 
-export const getReviews = (review_slug, sortby) => {
-  if (sortby === "") {
+export const getReviews = (review_slug, sortby, orderby) => {
+  if (sortby === "" && orderby === "") {
     return gamesApi.get(`/reviews?category=${review_slug}`).then(({ data }) => {
       return data.reviews;
     });
-  } else {
+  } else if (sortby !== "" && orderby === "") {
     return gamesApi
-      .get(`/reviews?category=${review_slug}`, { params: { sort_by: sortby } })
+      .get(`/reviews?category=${review_slug}&sort_by=${sortby}`)
       .then(({ data }) => {
         return data.reviews;
       });
+  } else if (sortby === "" && orderby !== "") {
+    return gamesApi
+      .get(`/reviews?category=${review_slug}&order_by=${orderby}`)
+      .then(({ data }) => {
+        return data.reviews;
+      });
+  } else if (sortby !== "" && orderby !== "") {
+    console.log(sortby, orderby);
+    return gamesApi
+      .get(
+        `/reviews?category=${review_slug}&sort_by=${sortby}&order_by=${orderby}`
+      )
+      .then(({ data }) => {
+        return data.reviews;
+      });
+  } else {
+    console.log("ERROR");
   }
 };
 

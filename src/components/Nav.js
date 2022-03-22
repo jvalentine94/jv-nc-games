@@ -17,7 +17,9 @@ const Nav = () => {
       {categories.map((category) => {
         return (
           <Link key={category.slug} to={`/category/${category.slug}`}>
-            {category.slug}&emsp;
+            {category.slug[0].toUpperCase() +
+              category.slug.slice(1).replaceAll("-", " ")}
+            &emsp;
           </Link>
         );
       })}
