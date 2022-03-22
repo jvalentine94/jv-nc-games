@@ -15,12 +15,9 @@ const PostComment = (props) => {
     } else {
       postComment(props.review, userState, body, props.setCommentState)
         .then(() => {
-          console.log("SUCCESS");
           setBody("");
         })
-        .catch((err) => {
-          console.log("ERROR", err);
-        });
+        .catch((err) => {});
     }
   };
 

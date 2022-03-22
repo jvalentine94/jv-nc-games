@@ -6,21 +6,16 @@ const gamesApi = axios.create({
 
 export const getCategories = () => {
   return gamesApi.get("/categories").then(({ data }) => {
-    console.log(data);
     return data.categories;
   });
 };
 
 export const getAllReviews = (sortby, orderby) => {
-  console.log("SORTBY", sortby);
   if (sortby === "" && orderby === "") {
-    console.log("CASE 1");
     return gamesApi.get("/reviews").then(({ data }) => {
       return data.reviews;
     });
   } else if (sortby !== "" && orderby === "") {
-    console.log("CASE 2", `/reviews?sort_by=${sortby}`);
-
     return gamesApi.get(`/reviews?sort_by=${sortby}`).then(({ data }) => {
       return data.reviews;
     });
@@ -29,14 +24,11 @@ export const getAllReviews = (sortby, orderby) => {
       return data.reviews;
     });
   } else if (sortby !== "" && orderby !== "") {
-    console.log(sortby, orderby);
     return gamesApi
       .get(`/reviews?sort_by=${sortby}&order_by=${orderby}`)
       .then(({ data }) => {
         return data.reviews;
       });
-  } else {
-    console.log("ERROR");
   }
 };
 
@@ -58,7 +50,6 @@ export const getReviews = (review_slug, sortby, orderby) => {
         return data.reviews;
       });
   } else if (sortby !== "" && orderby !== "") {
-    console.log(sortby, orderby);
     return gamesApi
       .get(
         `/reviews?category=${review_slug}&sort_by=${sortby}&order_by=${orderby}`
@@ -66,8 +57,6 @@ export const getReviews = (review_slug, sortby, orderby) => {
       .then(({ data }) => {
         return data.reviews;
       });
-  } else {
-    console.log("ERROR");
   }
 };
 
@@ -106,12 +95,10 @@ export const getComments = (review_id) => {
 export const deleteComment = (comment_id, setCommentState) => {
   return gamesApi.delete(`/comments/${comment_id}`).then(({ data }) => {
     setCommentState((currCommentState) => !currCommentState);
-    console.log(data);
   });
 };
 
 export const postComment = (review_id, username, body, setCommentState) => {
-  console.log(review_id, username, body);
   const postData = {
     username: username,
     body: body,
@@ -120,14 +107,11 @@ export const postComment = (review_id, username, body, setCommentState) => {
   return gamesApi
     .post(`/reviews/${review_id}/comments`, postData)
     .then((res) => {
-      console.log(res);
       setCommentState((currState) => !currState);
     });
 };
 
 export const patchCommentVotesUp1 = (setVotes, setErr, commentID) => {
-  console.log(commentID);
-
   setVotes((currVotes) => currVotes + 1);
   setErr(null);
 
@@ -138,7 +122,6 @@ export const patchCommentVotesUp1 = (setVotes, setErr, commentID) => {
 };
 
 export const patchCommentVotesDown1 = (setVotes, setErr, commentID) => {
-  console.log(commentID);
   setVotes((currVotes) => currVotes - 1);
   setErr(null);
 

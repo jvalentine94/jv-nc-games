@@ -15,15 +15,11 @@ const Home = () => {
   const [sortReq, setSortReq] = useState(false);
 
   useEffect(() => {
-    console.log(sortby);
     getAllReviews(sortby, orderby).then((data) => {
-      console.log(data);
       setReviews(data);
       setLoadingStatus(false);
     });
   }, [sortReq]);
-
-  console.log(loadingStatus);
 
   const handleSort = () => {
     setSortReq((currsort) => !currsort);

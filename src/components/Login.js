@@ -17,11 +17,8 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    console.log(userEntry, passwordEntry);
-
     if (users[`${userEntry}`] === passwordEntry) {
       setUserState(userEntry);
-      console.log(userState);
       setUserEntry("");
       setPasswordEntry("");
     } else {

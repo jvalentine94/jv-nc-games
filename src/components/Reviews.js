@@ -14,7 +14,6 @@ const Reviews = () => {
 
   useEffect(() => {
     getReviews(review_slug, sortby, orderby).then((reviewsFromApi) => {
-      console.log("REVIEWS", sortby, reviewsFromApi);
       setReviews(reviewsFromApi);
       setLoadingStatus(false);
     });
