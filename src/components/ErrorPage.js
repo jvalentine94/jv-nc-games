@@ -1,9 +1,9 @@
-import errorImg from "../images/error-image.png";
+import errorImg from "../images/error-image.webp";
 
 const ErrorPage = () => {
   return (
     <section className="ErrorPage">
-      <img src={errorImg} alt="Error" />
+      <img src={errorImg} alt="Error" className="ErrorImg" />
       <br></br>
       <br></br>
 

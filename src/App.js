@@ -34,15 +34,14 @@ function App() {
               </button>{" "}
             </p>
           </h1>
-
-          <Routes className="Pagebody" id="pagebody">
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/comments/:review_id" element={<ReviewPage />}></Route>
-            <Route path="/category/:review_slug" element={<Reviews />}></Route>
-            <Route path="/Login" element={<Login />}></Route>
-            <Route path="/*" element={<ErrorPage />} />
-          </Routes>
         </div>
+        <Routes className="Pagebody" id="pagebody">
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/comments/:review_id" element={<ReviewPage />}></Route>
+          <Route path="/category/:review_slug" element={<Reviews />}></Route>
+          <Route path="/Login" element={<Login />}></Route>
+          <Route path="/*" element={<ErrorPage />} />
+        </Routes>
       </UserContext.Provider>
     </BrowserRouter>
   );

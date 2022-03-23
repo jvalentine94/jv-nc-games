@@ -29,6 +29,7 @@ const ReviewPage = () => {
         setReview(review);
       })
       .catch(() => {
+        console.log("ERROR");
         setErr(true);
       });
   }, [review_id, commentState]);

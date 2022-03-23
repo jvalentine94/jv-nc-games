@@ -16,14 +16,6 @@ main {
   padding-top: 2%;
 }
 
-[hidden] {
-  display: none !important;
-}
-
-#loadingimage {
-  width: 300px;
-}
-
 body {
   font-family: "Trebuchet MS", sans-serif;
 }
@@ -101,7 +93,32 @@ ul {
   padding-top: 2px;
 }
 
+.ErrorPage {
+  text-align: center;
+  padding: 5vw 37vw 5vw 37vw;
+  color: red;
+}
+
 .ErrorMessage {
+  color: red;
+}
+
+.ErrorImg {
+  width: 25vw;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+#loadingimage {
+  width: 50vw;
+  padding: 5vw 25vw;
+}
+
+#LoadingMessage {
+  text-align: center;
+
   color: red;
 }
 
@@ -125,12 +142,18 @@ ul {
   #Reviews {
     position: absolute;
   }
+
   h1 {
     font-size: 3vw;
     top: -20px;
   }
   main {
     padding-top: 10%;
+  }
+  .ErrorPage {
+    text-align: center;
+    padding: 15vw 37vw 5vw 37vw;
+    color: red;
   }
 }
 

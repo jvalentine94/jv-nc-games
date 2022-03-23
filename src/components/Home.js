@@ -4,7 +4,7 @@ import { getAllReviews } from "../utils/api";
 
 import ReviewElement from "./ReviewElement";
 
-import errorImg from "../images/error-image.png";
+import errorImg from "../images/error-image.webp";
 
 const Home = () => {
   const [reviews, setReviews] = useState([]);
@@ -58,10 +58,7 @@ const Home = () => {
           Go
         </button>
       </h3>
-      <h3 hidden={!loadingStatus}>
-        <img src={errorImg} alt="Error" id="loadingimage" />
-        LOADING
-      </h3>
+      <h3 hidden={!loadingStatus}>LOADING...</h3>
       <ul>
         {reviews.map((review) => {
           return (
