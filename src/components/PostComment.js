@@ -11,7 +11,7 @@ const PostComment = (props) => {
 
   const handleSubmit = (body) => {
     if (body === "") {
-      setErrMessage("Already Voted");
+      setErrMessage("Please enter review body");
     } else {
       postComment(props.review, userState, body, props.setCommentState)
         .then(() => {
@@ -35,8 +35,9 @@ const PostComment = (props) => {
         }}
       ></input>
       <br></br>
-      <br></br>
 
+      <ErrorMessage message={errMessage}></ErrorMessage>
+      <br></br>
       <button
         onClick={() => {
           handleSubmit(body);
@@ -45,7 +46,6 @@ const PostComment = (props) => {
         Submit
       </button>
       <br></br>
-      <ErrorMessage message={errMessage}></ErrorMessage>
     </div>
   );
 };
