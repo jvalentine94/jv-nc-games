@@ -93,9 +93,18 @@ export const getComments = (review_id) => {
 };
 
 export const deleteComment = (comment_id, setCommentState) => {
-  return gamesApi.delete(`/comments/${comment_id}`).then(({ data }) => {
-    setCommentState((currCommentState) => !currCommentState);
-  });
+  return gamesApi
+    .delete(`/comments/${comment_id}`)
+    .then(() => {
+      console.log("SUCC");
+      setCommentState((currCommentState) => {
+        console.log(currCommentState);
+        return !currCommentState;
+      });
+    })
+    .catch(() => {
+      console.log("ERR");
+    });
 };
 
 export const postComment = (review_id, username, body, setCommentState) => {

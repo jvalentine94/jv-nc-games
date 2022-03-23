@@ -1,12 +1,22 @@
-import { useState } from "react";
-import { patchCommentVotesUp1, patchCommentVotesDown1 } from "../utils/api";
+import { useState, useContext } from "react";
+import { UserContext } from "../App";
+import ErrorMessage from "./ErrorMessage";
+import {
+  patchCommentVotesUp1,
+  patchCommentVotesDown1,
+  deleteComment,
+} from "../utils/api";
 
 const CommentElement = (props) => {
   const [votes, setVotes] = useState(0);
   const [err, setErr] = useState(null);
+  const [errMessage, setErrMessage] = useState("");
+
+  const { userState } = useContext(UserContext);
 
   const handleVote = (option, commentId) => {
     if (votes >= 1 || votes <= -1) {
+      setErrMessage("Already Voted");
     } else {
       if (option === 1) {
         patchCommentVotesUp1(setVotes, setErr, commentId);
@@ -17,9 +27,10 @@ const CommentElement = (props) => {
   };
 
   const deleteCommentHandler = () => {
-    if (props.comment.author === 1) {
-      deleteCommentHandler(props.comment.comment_id, props.setCommentState);
+    if (props.comment.author === userState) {
+      deleteComment(props.comment.comment_id, props.setCommentState);
     } else {
+      setErrMessage("Cannot Delete Another Users Comment");
     }
   };
 
@@ -51,6 +62,7 @@ const CommentElement = (props) => {
       >
         Delete
       </button>
+      <ErrorMessage message={errMessage}></ErrorMessage>
     </div>
   );
 };
