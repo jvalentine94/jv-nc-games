@@ -58,7 +58,9 @@ const Home = () => {
           Go
         </button>
       </h3>
-      <h3 hidden={!loadingStatus}>LOADING...</h3>
+      <h3 id="LoadingMessage" hidden={!loadingStatus}>
+        LOADING...
+      </h3>
       <ul>
         {reviews.map((review) => {
           return (
